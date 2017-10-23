@@ -14,15 +14,15 @@ public class Conexao {
 
     }
 
-    public static java.sql.Connection getConexaoMySQL() {
+    public static java.sql.Connection getConexao() {
         Connection connection = null;
         try {
-            String driverName = "com.mysql.jdbc.Driver";
+            String driverName = "com.mysql.cj.jdbc.Driver";
             Class.forName(driverName);
             String serverName = "localhost";
-            String mydatabase = "Banco";
-            String url = "jdbc:mysql://" + serverName + "/" + mydatabase;
-            String username = "";
+            String mydatabase = "projeto";
+            String url = "jdbc:mysql://" + serverName + "/" + mydatabase + "?useSSL=false";
+            String username = "root";
             String password = "admin";
             connection = DriverManager.getConnection(url, username, password);
             if (connection != null) {
@@ -46,7 +46,7 @@ public class Conexao {
 
     public static boolean closeConection() {
         try {
-            Conexao.getConexaoMySQL().close();
+            Conexao.getConexao().close();
             return true;
         } catch (SQLException e) {
             return false;
@@ -55,6 +55,6 @@ public class Conexao {
 
     public static java.sql.Connection openConection() {
         closeConection();
-        return Conexao.getConexaoMySQL();
+        return Conexao.getConexao();
     }
 }
