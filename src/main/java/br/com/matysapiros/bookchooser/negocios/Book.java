@@ -1,6 +1,7 @@
-package br.com.matysapiros.bookchooser;
+package br.com.matysapiros.bookchooser.negocios;
 
 public class Book{
+
     private String nome;
     private int numeracao;
     private double avaliacao;

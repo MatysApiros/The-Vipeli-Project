@@ -1,6 +1,7 @@
-package br.com.matysapiros.bookchooser;
+package br.com.matysapiros.bookchooser.dados;
 
 public enum EnumGenre {
+
     COMEDIA("Comédia"),
     TERROR("Terror"),
     FICCAO("Ficção"),
@@ -19,7 +20,8 @@ public enum EnumGenre {
     FABULA("Fabula"),
     MISTERIO("Mistério"),
     ENSAIO("Ensaio"),
-    SATIRA("Sátira");
+    SATIRA("Sátira"),
+    RELIGIAO("Religião");
     private String genre;
 
     EnumGenre(String genre){

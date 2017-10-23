@@ -1,4 +1,4 @@
-package br.com.matysapiros.bookchooser;
+package br.com.matysapiros.bookchooser.dados;
 
 import java.awt.print.Book;
 import java.util.ArrayList;
