@@ -5,19 +5,15 @@ public class Book{
     private String nome;
     private int numeracao;
     private double avaliacao;
-    private String genero;
-    private String subGenero;
-    private String tipo;
+    private int vezesLido;
 
 
 
-    public Book(String nome, int numeracao, double avaliacao, String genero, String subGenero, String tipo) {
+    public Book(String nome, int numeracao, double avaliacao, String tipo, int vezesLido) {
         this.nome = nome;
         this.numeracao = numeracao;
         this.avaliacao = avaliacao;
-        this.genero = genero;
-        this.subGenero = subGenero;
-        this.tipo = tipo;
+        this.vezesLido = vezesLido;
     }
 
     public String getNome() {
@@ -32,16 +28,8 @@ public class Book{
         return avaliacao;
     }
 
-    public String getGenero() {
-        return genero;
-    }
-
-    public String getSubGenero() {
-        return subGenero;
-    }
-
-    public String getTipo(){
-        return tipo;
+    public int getVezesLido() {
+        return vezesLido;
     }
 
     public void setNome(String nome) {
@@ -56,16 +44,7 @@ public class Book{
         this.avaliacao = avaliacao;
     }
 
-    public void setGenero(String genero) {
-        this.genero = genero;
-    }
-
-    public void setSubGenero(String subGenero) {
-
-        this.subGenero = subGenero;
-    }
-
-    public void setTipo(String tipo) {
-        this.tipo = tipo;
+    public void setVezesLido(int vezesLido) {
+        this.vezesLido = vezesLido;
     }
 }
