@@ -4,15 +4,20 @@ import org.junit.Test;
 
 public class DatabaseManagementTest {
     @Test
-    public void selectBook() throws Exception {
+    public void insertBookGenreTest(){
         DatabaseManagement databaseManagement = new DatabaseManagement();
-        org.junit.Assert.assertTrue(databaseManagement.selectBook("Eragon"));
+        org.junit.Assert.assertTrue(databaseManagement.insertBookGenre(1,6));
     }
 
     @Test
-    public void insertBook() throws Exception {
+    public void insertBookGenreTest2(){
         DatabaseManagement databaseManagement = new DatabaseManagement();
-        org.junit.Assert.assertTrue(databaseManagement.insertBook("Eragon",1,8.75,1));
+        org.junit.Assert.assertTrue(databaseManagement.insertBookGenre(1,33));
     }
 
+    @Test
+    public void insertBookTypeTest(){
+        DatabaseManagement databaseManagement = new DatabaseManagement();
+        org.junit.Assert.assertTrue(databaseManagement.insertBookType(1,4));
+    }
 }
