@@ -6,11 +6,11 @@ import java.sql.DriverManager;
 
 import java.sql.SQLException;
 
-public class Conexao {
+public class DatabaseConnetion {
 
     public static String status = "Não conectou...";
 
-    public Conexao() {
+    public DatabaseConnetion() {
 
     }
 
@@ -46,7 +46,7 @@ public class Conexao {
 
     public static boolean closeConection() {
         try {
-            Conexao.getConexao().close();
+            DatabaseConnetion.getConexao().close();
             return true;
         } catch (SQLException e) {
             return false;
@@ -55,6 +55,6 @@ public class Conexao {
 
     public static java.sql.Connection openConection() {
         closeConection();
-        return Conexao.getConexao();
+        return DatabaseConnetion.getConexao();
     }
 }

@@ -4,11 +4,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class Insertion {
+public class DatabaseManagement {
     private Connection connection;
 
-    public Insertion() {
-        this.connection = Conexao.getConexao();
+    public DatabaseManagement() {
+        this.connection = DatabaseConnetion.getConexao();
     }
 
     public boolean insertBook(String nome, int numeracao, double avaliacao, int vezesLido){
@@ -35,7 +35,9 @@ public class Insertion {
             ResultSet string = statementmt.executeQuery();
             while (string.next()) {
                 String title = string.getString("title");
-                System.out.println("Livro: " + title);
+                String id = string.getString("book_id");
+                String numeracao = string.getString("numeracao");
+                System.out.println("Book: " + title + "\n" + "Book ID:" + id + "\n" + "Numeration: ");
             }
             statementmt.execute();
             statementmt.close();
