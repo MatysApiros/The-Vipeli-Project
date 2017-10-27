@@ -1,5 +1,6 @@
 package br.com.matysapiros.bookchooser.dados;
 
+import br.com.matysapiros.bookchooser.negocios.Book;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -12,14 +13,14 @@ public class BookDAO {
         this.connection = DatabaseConnetion.getConexao();
     }
 
-    public boolean insertBook(String nome, int numeracao, double avaliacao, int vezesLido){
+    public boolean insertBook(Book book){
         String sql = "insert into books (title,numeracao,avaliacao,read_flag) values(?,?,?,?);";
         try{
             PreparedStatement statementmt = connection.prepareStatement(sql);
-            statementmt.setString(1, nome);
-            statementmt.setString(2, String.valueOf(numeracao));
-            statementmt.setString(3, String.valueOf(avaliacao));
-            statementmt.setString(4, String.valueOf(vezesLido));
+            statementmt.setString(1, book.getNome());
+            statementmt.setString(2, String.valueOf(book.getNumeracao()));
+            statementmt.setString(3, String.valueOf(book.getAvaliacao()));
+            statementmt.setString(4, String.valueOf(book.getVezesLido()));
             statementmt.execute();
             statementmt.close();
             return true;
@@ -29,17 +30,18 @@ public class BookDAO {
     }
 
     public boolean selectAllBooks(){
+                Book book = new Book();
         String sql = "select * from books";
         try{
             PreparedStatement statementmt = connection.prepareStatement(sql);
             ResultSet string = statementmt.executeQuery();
             while (string.next()) {
-                String title = string.getString("title");
-                String id = string.getString("book_id");
-                String numeracao = string.getString("numeracao");
-                String avaliacao =  string.getString("avaliacao");
-                String vezesLido = string.getString("read_flag");
-                System.out.println("Book: " + title + "\n" + "Book ID:" + id + "\n" + "Numeration: " + numeracao + "\n" + "Evaluation: " + avaliacao + "\n" + "Read Count: " + vezesLido + "\n");
+                book.setNome(string.getString("title"));
+                book.setId(Integer.parseInt(string.getString("book_id")));
+                book.setGenre(string.getNString("genre"));
+                book.setNumeracao(Integer.parseInt(string.getString("numeracao")));
+                book.setAvaliacao(Integer.parseInt(string.getString("avaliacao")));
+                book.setVezesLido(Integer.parseInt(string.getString("read_flag")));
             }
             statementmt.execute();
             statementmt.close();
