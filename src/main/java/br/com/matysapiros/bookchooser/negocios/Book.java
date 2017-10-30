@@ -79,4 +79,9 @@ public class Book{
     public void setVezesLido(int vezesLido) {
         this.vezesLido = vezesLido;
     }
+
+    @Override
+    public String toString() {
+        return ("Nome: " + nome + "\nNumeracao: " + numeracao + "\nAvaliação: " + avaliacao + "\nVezes Lido: " + vezesLido);
+    }
 }

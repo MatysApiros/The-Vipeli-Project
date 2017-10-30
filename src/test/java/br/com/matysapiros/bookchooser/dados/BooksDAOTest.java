@@ -1,13 +1,15 @@
 package br.com.matysapiros.bookchooser.dados;
 
+import br.com.matysapiros.bookchooser.negocios.Book;
 import org.junit.Test;
 
 public class BooksDAOTest {
-
+    /*
     @Test
     public void selectBook() throws Exception {
         BookDAO bookDAO = new BookDAO();
-        org.junit.Assert.assertTrue(bookDAO.selectBookByName("Eragon"));
+
+        org.junit.Assert.assertTrue(bookDAO.selectBook());
     }
 
     @Test
@@ -27,25 +29,27 @@ public class BooksDAOTest {
         BookDAO bookDAO = new BookDAO();
         org.junit.Assert.assertTrue(bookDAO.selectBookByName("Herança"));
     }
-
+    */
     @Test
     public void selectBookByID() throws Exception {
         BookDAO bookDAO = new BookDAO();
-        org.junit.Assert.assertTrue(bookDAO.selectBookByID(7));
+        Book book = new Book("Herança",4,1.00,0);
+        org.junit.Assert.assert(book.equals(bookDAO.selectBookByID(7)));
     }
-
+    /*
     @Test
     public void selectAllBooks() throws Exception {
         BookDAO bookDAO = new BookDAO();
         org.junit.Assert.assertTrue(bookDAO.selectAllBooks());
     }
-
+    */
     @Test
     public void insertBook() throws Exception {
         BookDAO bookDAO = new BookDAO();
-        org.junit.Assert.assertTrue(bookDAO.insertBook("Eragon",1,8.75,1));
+        Book book = new Book("1984",1,9.50,1);
+        org.junit.Assert.assertTrue(bookDAO.insertBook(book));
     }
-
+    /*
     @Test
     public void insertBook2() throws Exception {
         BookDAO bookDAO = new BookDAO();
@@ -63,4 +67,5 @@ public class BooksDAOTest {
         BookDAO bookDAO = new BookDAO();
         org.junit.Assert.assertTrue(bookDAO.insertBook("Herança",4, 1,0));
     }
+    */
 }
