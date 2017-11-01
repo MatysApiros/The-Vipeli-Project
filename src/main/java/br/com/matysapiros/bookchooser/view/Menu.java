@@ -1,6 +1,8 @@
-package br.com.matysapiros.bookchooser.dados;
+package br.com.matysapiros.bookchooser.view;
 
-import br.com.matysapiros.bookchooser.negocios.Book;
+import br.com.matysapiros.bookchooser.controler.BookDAO;
+import br.com.matysapiros.bookchooser.controler.BookGenreDAO;
+import br.com.matysapiros.bookchooser.model.Book;
 
 import java.util.Scanner;
 
@@ -64,9 +66,9 @@ public class Menu {
                 int typeId = teclado.nextInt();
                 bookDAO.insertBookType(bookId2, typeId);
                 insertMenu();
-                default:
-                    insertMenu();
-                    break;
+            default:
+                insertMenu();
+                break;
         }
     }
 
@@ -78,38 +80,40 @@ public class Menu {
         System.out.println("3 - Retornar lista de todos os Livros no sistema;");
         System.out.println("4 - Retornar lista de todos os Gêneros no sistema;");
         System.out.println("5 - Retornar lista de todos os Tipos no sistema;");
+        System.out.println("6 - Retorna um Livro e seus Gêneros;");
         int entrada = teclado.nextInt();
         switch (entrada){
             case 0:
                 menuPrincipal();
             case 1:
                 System.out.println("Insira o Título do Livro:");
-                String title = teclado.nextLine();teclado.next();
-                System.out.println(bookDAO.selectBookByTitle(searchByName()));
+                String title = teclado.next();
+
+                System.out.println(bookDAO.selectBookByTitle(title) + "\n");
                 selectMenu();
                 return;
             case 2:
                 System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
                 int bookId = teclado.nextInt();
-                System.out.println(bookDAO.selectBookByID(bookId));
+                System.out.println(bookDAO.selectBookByID(bookId) + "\n");
                 selectMenu();
                 return;
             case 3:
-                System.out.println(bookDAO.selectAllBooks());
+                System.out.println(bookDAO.selectAllBooks() + "\n");
                 selectMenu();
                 return;
             case 4:
-                System.out.println("Insira o ID do Gênero(*Caso não saiba o ID, consulte o ID do Gênero através de uma das opções de pesquisa!*)");
-                int genreId = teclado.nextInt();
-                System.out.println();
+                System.out.println(bookGenreDAO.selectAllGenres() + "\n");
                 selectMenu();
                 return;
             case 5:
-                System.out.println("Insira o ID do Tipo(*Caso não saiba o ID, consulte o ID do Tipo através de uma das opções de pesquisa!*)");
-                int typeId = teclado.nextInt();
-                System.out.println();
+                System.out.println(bookDAO.selectAllTypes() + "\n");
                 selectMenu();
                 return;
+            case 6:
+                System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
+                int bookId2 = teclado.nextInt();
+                System.out.println(bookDAO.selectBooksAndGenres(bookId2) + "\n");
             default:
                 selectMenu();
                 break;
@@ -118,7 +122,7 @@ public class Menu {
 
     public Book insertBookData(){
         System.out.println("Insira o Titulo do Livro:");
-        String titulo = teclado.nextLine();teclado.next();
+        String titulo = teclado.next();
         System.out.println("Insira a Numeração do Livro:");
         int numeracao = teclado.nextInt();
         System.out.println("Insira a Avaliação do Livro (*Caso não haja avaliação, dar nota 1,00*)");
@@ -127,12 +131,6 @@ public class Menu {
         int vezesLido = teclado.nextInt();
         Book book = new Book(titulo,numeracao,avaliacao,vezesLido);
         return book;
-    }
-
-    public String searchByName(){
-        System.out.println("Insira o Titulo do Livro desejado:");
-        String titulo =  teclado.nextLine();teclado.next();
-        return titulo;
     }
 }
 

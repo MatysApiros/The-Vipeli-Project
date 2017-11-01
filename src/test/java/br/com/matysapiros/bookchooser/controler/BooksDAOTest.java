@@ -1,6 +1,6 @@
-package br.com.matysapiros.bookchooser.dados;
+package br.com.matysapiros.bookchooser.controler;
 
-import br.com.matysapiros.bookchooser.negocios.Book;
+import br.com.matysapiros.bookchooser.model.Book;
 import org.junit.Test;
 
 public class BooksDAOTest {

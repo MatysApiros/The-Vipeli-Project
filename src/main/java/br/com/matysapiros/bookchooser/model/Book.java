@@ -1,4 +1,4 @@
-package br.com.matysapiros.bookchooser.negocios;
+package br.com.matysapiros.bookchooser.model;
 
 public class Book{
 

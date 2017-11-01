@@ -1,7 +1,8 @@
-package br.com.matysapiros.bookchooser.dados;
+package br.com.matysapiros.bookchooser.controler;
 
-import br.com.matysapiros.bookchooser.negocios.Book;
-import br.com.matysapiros.bookchooser.negocios.Genre;
+import br.com.matysapiros.bookchooser.model.Book;
+import br.com.matysapiros.bookchooser.model.BooksAndGenres;
+import br.com.matysapiros.bookchooser.model.Type;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +33,7 @@ public class BookDAO {
     }
 
     public List<Book> selectAllBooks(){
-        String sql = "SELECT books.title, genres.genre, books_types.description FROM books_and_genres JOIN books ON books.book_id = books_and_genres.book_id join genres on genres.genre_id = books_and_genres.genre_id;";
+        String sql = "select * from books";
         try(PreparedStatement statementmt = connection.prepareStatement(sql)){
             ResultSet string = statementmt.executeQuery();
             return mapResultSetToBookList(string);
@@ -49,6 +50,14 @@ public class BookDAO {
         return books;
     }
 
+    private Book mapFromResultSet(ResultSet string) throws SQLException {
+        Book book = new Book();
+        book.setNome(string.getString("title"));
+        book.setNumeracao(Integer.parseInt(string.getString("numeracao")));
+        book.setAvaliacao(Double.parseDouble(string.getString("avaliacao")));
+        book.setVezesLido(Integer.parseInt(string.getString("read_flag")));
+        return book;
+    }
 
     public Book selectBookByID(Integer id){
         String sql = "select * from books where book_id = ?";
@@ -78,20 +87,37 @@ public class BookDAO {
         }
     }
 
-    private Book mapFromResultSet(ResultSet string) throws SQLException {
-        Book book = new Book();
-        book.setNome(string.getString("title"));
-        book.setNumeracao(Integer.parseInt(string.getString("numeracao")));
-        book.setAvaliacao(Double.parseDouble(string.getString("avaliacao")));
-        book.setVezesLido(Integer.parseInt(string.getString("read_flag")));
-        return book;
+    public List<BooksAndGenres> selectBooksAndGenres(Integer book_id){
+        String sql = "SELECT books.title, genres.genre FROM books_and_genres JOIN books ON books.book_id = books_and_genres.book_id join genres on genres.genre_id = books_and_genres.genre_id where books.book_id = ?;";
+        try(PreparedStatement statementmt = connection.prepareStatement(sql)){
+            statementmt.setInt(1, book_id);
+            ResultSet string = statementmt.executeQuery();
+            return mapResultSetToBooksAndGenresList(string);
+        } catch (SQLException excption){
+            throw new RuntimeException(excption);
+        }
+    }
+
+    private List<BooksAndGenres> mapResultSetToBooksAndGenresList(ResultSet resultSet) throws SQLException {
+        List<BooksAndGenres> books = new ArrayList<>();
+        while (resultSet.next()) {
+            books.add((BooksAndGenres) mapFromResultSetBooksANdGenres(resultSet));
+        }
+        return books;
+    }
+
+    private Book mapFromResultSetBooksANdGenres(ResultSet string) throws SQLException {
+        BooksAndGenres bookAndGenre = new BooksAndGenres();
+        bookAndGenre.setNome(string.getString("title"));
+        bookAndGenre.setGenre(string.getString("genre"));
+        return bookAndGenre;
     }
 
     public boolean insertBookType(int bookID, int typeID){
         String sql = "update books set type_id = ? where book_id = ?;";
         try(PreparedStatement statementmt = connection.prepareStatement(sql);){
-            statementmt.setString(1, String.valueOf(bookID));
-            statementmt.setString(2, String.valueOf(typeID));
+            statementmt.setString(1, String.valueOf(typeID));
+            statementmt.setString(2, String.valueOf(bookID));
             statementmt.execute();
             return true;
         }catch (SQLException excption){
@@ -99,28 +125,28 @@ public class BookDAO {
         }
     }
 
-    public List<Genre> selectAllGenres(){
-        String sql = "SELECT * FROM genres;";
+    public List<Type> selectAllTypes(){
+        String sql = "select * from books_types;";
         try(PreparedStatement statementmt = connection.prepareStatement(sql)){
             ResultSet resultSet = statementmt.executeQuery();
-            return mapResultSetToGenreList(resultSet);
+            return mapResultSetToTypesList(resultSet);
         } catch (SQLException excption){
             throw new RuntimeException(excption);
         }
     }
 
-    private Genre mapFromResultSetGenres(ResultSet resultSet) throws SQLException {
-        Genre genre = new Genre();
-        genre.setGenreID(Integer.parseInt(resultSet.getString("genre_id")));
-        genre.setGenre(resultSet.getString("genre"));
-        return genre;
+    private List<Type> mapResultSetToTypesList(ResultSet resultSet) throws SQLException {
+        List<Type> types = new ArrayList<>();
+        while (resultSet.next()) {
+            types.add(mapFromResultSetTypes(resultSet));
+        }
+        return types;
     }
 
-    private List<Genre> mapResultSetToGenreList(ResultSet resultSet) throws SQLException {
-        List<Genre> genres = new ArrayList<>();
-        while (resultSet.next()) {
-            genres.add(mapFromResultSetGenres(resultSet));
-        }
-        return genres;
+    private Type mapFromResultSetTypes(ResultSet resultSet) throws SQLException {
+        Type type = new Type();
+        type.setTypeId(Integer.parseInt(resultSet.getString("type_id")));
+        type.setType(resultSet.getString("description"));
+        return type;
     }
 }

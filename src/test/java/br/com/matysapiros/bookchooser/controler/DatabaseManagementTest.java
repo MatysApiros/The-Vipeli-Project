@@ -1,4 +1,4 @@
-package br.com.matysapiros.bookchooser.dados;
+package br.com.matysapiros.bookchooser.controler;
 
 import org.junit.Test;
 
