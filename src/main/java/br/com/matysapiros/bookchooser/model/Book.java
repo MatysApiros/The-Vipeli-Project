@@ -82,6 +82,6 @@ public class Book{
 
     @Override
     public String toString() {
-        return ("Nome: " + nome + "\nNumeracao: " + numeracao + "\nAvaliação: " + avaliacao + "\nVezes Lido: " + vezesLido);
+        return ("\nNome: " + nome + "\nNumeracao: " + numeracao + "\nAvaliação: " + avaliacao + "\nVezes Lido: " + vezesLido + "\n");
     }
 }

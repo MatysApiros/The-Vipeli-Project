@@ -1,8 +1,12 @@
 package br.com.matysapiros.bookchooser.view;
 
-import br.com.matysapiros.bookchooser.controler.BookDAO;
-import br.com.matysapiros.bookchooser.controler.BookGenreDAO;
+import br.com.matysapiros.bookchooser.controler.InsertsControler;
+import br.com.matysapiros.bookchooser.controler.ListsControler;
+import br.com.matysapiros.bookchooser.controler.SelectsControler;
+import br.com.matysapiros.bookchooser.database.BookDAO;
+import br.com.matysapiros.bookchooser.database.GenreDAO;
 import br.com.matysapiros.bookchooser.model.Book;
+import br.com.matysapiros.bookchooser.model.BooksException;
 
 import java.util.Scanner;
 
@@ -10,7 +14,10 @@ public class Menu {
 
     private Scanner teclado = new Scanner(System.in);
     BookDAO bookDAO = new BookDAO();
-    BookGenreDAO bookGenreDAO = new BookGenreDAO();
+    GenreDAO genreDAO = new GenreDAO();
+    ListsControler listsControler = new ListsControler();
+    SelectsControler selectsControler = new SelectsControler();
+    InsertsControler insertsControler = new InsertsControler();
 
     public void menuPrincipal() {
         System.out.println("BookBank:");
@@ -47,7 +54,7 @@ public class Menu {
             case 0:
                 menuPrincipal();
             case 1:
-                bookDAO.insertBook(insertBookData());
+                insertsControler.insertBook(insertBookData());
                 System.out.println("Livro inserido com sucesso;");
                 insertMenu();
                 return;
@@ -56,7 +63,7 @@ public class Menu {
                 int bookId = teclado.nextInt();
                 System.out.println("Insira o ID do Gênero(*Caso não saiba o ID, consulte o ID do Gênero através de uma das opções de pesquisa!*)");
                 int genreId = teclado.nextInt();
-                bookGenreDAO.insertBookGenre(bookId, genreId);
+                insertsControler.insertBookGenre(bookId, genreId);
                 insertMenu();
                 return;
             case 3:
@@ -64,7 +71,7 @@ public class Menu {
                 int bookId2 = teclado.nextInt();
                 System.out.println("Insira o ID do Tipo(*Caso não saiba o ID, consulte o ID do Tipo através de uma das opções de pesquisa!*)");
                 int typeId = teclado.nextInt();
-                bookDAO.insertBookType(bookId2, typeId);
+                insertsControler.insertBookType(bookId2, typeId);
                 insertMenu();
             default:
                 insertMenu();
@@ -75,8 +82,8 @@ public class Menu {
     public void selectMenu(){
         System.out.println("Selecione a funcionalidade que deseja utilizar!");
         System.out.println("0 - Retornar ao menu anterior;");
-        System.out.println("1 - Pesquisar Livros por Título;");
-        System.out.println("2 - Pesquisar Livros por ID;");
+        System.out.println("1 - Pesquisar Livro por Título;");
+        System.out.println("2 - Pesquisar Livro por ID;");
         System.out.println("3 - Retornar lista de todos os Livros no sistema;");
         System.out.println("4 - Retornar lista de todos os Gêneros no sistema;");
         System.out.println("5 - Retornar lista de todos os Tipos no sistema;");
@@ -88,26 +95,29 @@ public class Menu {
             case 1:
                 System.out.println("Insira o Título do Livro:");
                 String title = teclado.next();
-
-                System.out.println(bookDAO.selectBookByTitle(title) + "\n");
+                System.out.println(selectsControler.selectBookByTitle(title));
                 selectMenu();
                 return;
             case 2:
                 System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
                 int bookId = teclado.nextInt();
-                System.out.println(bookDAO.selectBookByID(bookId) + "\n");
+                System.out.println(selectsControler.selectBookByID(bookId));
                 selectMenu();
                 return;
             case 3:
-                System.out.println(bookDAO.selectAllBooks() + "\n");
-                selectMenu();
+                try{
+                    System.out.println(listsControler.listOfBooks());
+                    selectMenu();
+                }catch(BooksException excption){
+                    System.out.println(excption);
+                }
                 return;
             case 4:
-                System.out.println(bookGenreDAO.selectAllGenres() + "\n");
+                System.out.println(listsControler.listOfGenres());
                 selectMenu();
                 return;
             case 5:
-                System.out.println(bookDAO.selectAllTypes() + "\n");
+                System.out.println(listsControler.listOfTypes());
                 selectMenu();
                 return;
             case 6:

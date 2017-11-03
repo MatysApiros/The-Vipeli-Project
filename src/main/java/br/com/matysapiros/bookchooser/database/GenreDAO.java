@@ -1,4 +1,4 @@
-package br.com.matysapiros.bookchooser.controler;
+package br.com.matysapiros.bookchooser.database;
 
 import br.com.matysapiros.bookchooser.model.Genre;
 
@@ -9,12 +9,13 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class BookGenreDAO {
+public class GenreDAO {
     private Connection connection;
 
-    public BookGenreDAO() {
+    public GenreDAO() {
         this.connection = DatabaseConnetion.getConexao();
     }
+
     public boolean insertBookGenre(int bookID, int genreID){
         String sql = "insert into books_and_genres (book_id,genre_id) values(?,?);";
         try(PreparedStatement statementmt = connection.prepareStatement(sql)){

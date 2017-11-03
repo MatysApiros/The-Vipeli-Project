@@ -1,4 +1,4 @@
-package br.com.matysapiros.bookchooser.controler;
+package br.com.matysapiros.bookchooser.database;
 
 import java.sql.Connection;
 
