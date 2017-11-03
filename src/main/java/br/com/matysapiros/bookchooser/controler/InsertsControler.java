@@ -23,4 +23,9 @@ public class InsertsControler{
         bookDAO.insertBookType(bookId,typeId);
         return true;
     }
+
+    public boolean deleteBook(int bookId){
+        bookDAO.deleteBook(bookId);
+        return true;
+    }
 }

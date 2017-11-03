@@ -32,9 +32,20 @@ public class BookDAO {
 
     public boolean insertBookType(int bookID, int typeID){
         String sql = "update books set type_id = ? where book_id = ?;";
-        try(PreparedStatement statementmt = connection.prepareStatement(sql);){
+        try(PreparedStatement statementmt = connection.prepareStatement(sql)){
             statementmt.setString(1, String.valueOf(typeID));
             statementmt.setString(2, String.valueOf(bookID));
+            statementmt.execute();
+            return true;
+        }catch (SQLException excption){
+            throw new RuntimeException(excption);
+        }
+    }
+
+    public boolean deleteBook(int bookId){
+        String sql = "delete from books where book_id = ?;";
+        try(PreparedStatement statementmt = connection.prepareStatement(sql)){
+            statementmt.setString(1, String.valueOf(bookId));
             statementmt.execute();
             return true;
         }catch (SQLException excption){

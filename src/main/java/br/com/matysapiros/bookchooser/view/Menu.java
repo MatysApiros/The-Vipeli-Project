@@ -48,6 +48,7 @@ public class Menu {
         System.out.println("1 - Inserir Livros;");
         System.out.println("2 - Adicionar Gênero do Livro;");
         System.out.println("3 - Adicionar Tipo;");
+        System.out.println("4 - Deletar um Livro;");
         int entrada = teclado.nextInt();
 
         switch (entrada){
@@ -73,6 +74,12 @@ public class Menu {
                 int typeId = teclado.nextInt();
                 insertsControler.insertBookType(bookId2, typeId);
                 insertMenu();
+            case 4:
+                System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
+                int bookId3 = teclado.nextInt();
+                insertsControler.deleteBook(bookId3);
+                insertMenu();
+                return;
             default:
                 insertMenu();
                 break;
@@ -137,7 +144,7 @@ public class Menu {
         int numeracao = teclado.nextInt();
         System.out.println("Insira a Avaliação do Livro (*Caso não haja avaliação, dar nota 1,00*)");
         double avaliacao = teclado.nextDouble();
-        System.out.println("Insira o número de Vezes Lido:");
+        System.out.println("Insira o número de que o você leu o Livro:");
         int vezesLido = teclado.nextInt();
         Book book = new Book(titulo,numeracao,avaliacao,vezesLido);
         return book;
