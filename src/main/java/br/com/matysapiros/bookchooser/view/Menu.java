@@ -7,7 +7,6 @@ import br.com.matysapiros.bookchooser.database.BookDAO;
 import br.com.matysapiros.bookchooser.database.GenreDAO;
 import br.com.matysapiros.bookchooser.model.Book;
 import br.com.matysapiros.bookchooser.model.BooksException;
-
 import java.util.Scanner;
 
 public class Menu {
@@ -55,29 +54,36 @@ public class Menu {
             case 0:
                 menuPrincipal();
             case 1:
+                System.out.println("\n");
                 insertsControler.insertBook(insertBookData());
-                System.out.println("Livro inserido com sucesso;");
+                System.out.println("Livro inserido com sucesso;\n");
                 insertMenu();
                 return;
             case 2:
+                System.out.println("\n");
                 System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
                 int bookId = teclado.nextInt();
                 System.out.println("Insira o ID do Gênero(*Caso não saiba o ID, consulte o ID do Gênero através de uma das opções de pesquisa!*)");
                 int genreId = teclado.nextInt();
                 insertsControler.insertBookGenre(bookId, genreId);
+                System.out.println("\n");
                 insertMenu();
                 return;
             case 3:
+                System.out.println("\n");
                 System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
                 int bookId2 = teclado.nextInt();
                 System.out.println("Insira o ID do Tipo(*Caso não saiba o ID, consulte o ID do Tipo através de uma das opções de pesquisa!*)");
                 int typeId = teclado.nextInt();
                 insertsControler.insertBookType(bookId2, typeId);
+                System.out.println("\n");
                 insertMenu();
             case 4:
+                System.out.println("\n");
                 System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
                 int bookId3 = teclado.nextInt();
                 insertsControler.deleteBook(bookId3);
+                System.out.println("\n");
                 insertMenu();
                 return;
             default:
@@ -101,18 +107,21 @@ public class Menu {
             case 0:
                 menuPrincipal();
             case 1:
+                System.out.println("\n");
                 System.out.println("Insira o Título do Livro:");
                 String title = teclado.next();
                 System.out.println(selectsControler.selectBookByTitle(title));
                 selectMenu();
                 return;
             case 2:
+                System.out.println("\n");
                 System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
                 int bookId = teclado.nextInt();
                 System.out.println(selectsControler.selectBookByID(bookId));
                 selectMenu();
                 return;
             case 3:
+                System.out.println("\n");
                 try{
                     System.out.println(listsControler.listOfBooks());
                     selectMenu();
@@ -121,14 +130,17 @@ public class Menu {
                 }
                 return;
             case 4:
+                System.out.println("\n");
                 System.out.println(listsControler.listOfGenres());
                 selectMenu();
                 return;
             case 5:
+                System.out.println("\n");
                 System.out.println(listsControler.listOfTypes());
                 selectMenu();
                 return;
             case 6:
+                System.out.println("\n");
                 System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
                 int bookId2 = teclado.nextInt();
                 System.out.println(bookDAO.selectBooksAndGenres(bookId2) + "\n");
