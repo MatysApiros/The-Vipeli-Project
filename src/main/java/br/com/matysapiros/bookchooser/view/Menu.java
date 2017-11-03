@@ -20,12 +20,11 @@ public class Menu {
     InsertsControler insertsControler = new InsertsControler();
 
     public void menuPrincipal() {
-        System.out.println("BookBank:");
         System.out.println("Menu Principal");
         System.out.println("Opções:");
         System.out.println("1 - Menu Inserir;");
         System.out.println("2 - Menu Pesquisar;");
-        System.out.println("3 - Finallizar Aplicação;");
+        System.out.println("3 - Finallizar Aplicação;" + "\n");
         int entrada = teclado.nextInt();
         switch (entrada){
             case 1:
@@ -37,18 +36,19 @@ public class Menu {
             case 3:
                 System.exit(0);
             default:
+                System.out.println("\n");
                 menuPrincipal();
                 break;
         }
     }
 
     public void insertMenu(){
-        System.out.println("Selecione a funcionalidade que deseja utilizar!");
+        System.out.println("\nSelecione a funcionalidade que deseja utilizar!\n");
         System.out.println("0 - Retornar ao menu anterior;");
         System.out.println("1 - Inserir Livros;");
         System.out.println("2 - Adicionar Gênero do Livro;");
         System.out.println("3 - Adicionar Tipo;");
-        System.out.println("4 - Deletar um Livro;");
+        System.out.println("4 - Deletar um Livro;\n");
         int entrada = teclado.nextInt();
 
         switch (entrada){
@@ -81,20 +81,21 @@ public class Menu {
                 insertMenu();
                 return;
             default:
+                System.out.println("\n");
                 insertMenu();
                 break;
         }
     }
 
     public void selectMenu(){
-        System.out.println("Selecione a funcionalidade que deseja utilizar!");
+        System.out.println("\nSelecione a funcionalidade que deseja utilizar!\n");
         System.out.println("0 - Retornar ao menu anterior;");
         System.out.println("1 - Pesquisar Livro por Título;");
         System.out.println("2 - Pesquisar Livro por ID;");
         System.out.println("3 - Retornar lista de todos os Livros no sistema;");
         System.out.println("4 - Retornar lista de todos os Gêneros no sistema;");
         System.out.println("5 - Retornar lista de todos os Tipos no sistema;");
-        System.out.println("6 - Retorna um Livro e seus Gêneros;");
+        System.out.println("6 - Retorna um Livro e seus Gêneros;\n");
         int entrada = teclado.nextInt();
         switch (entrada){
             case 0:
@@ -132,6 +133,7 @@ public class Menu {
                 int bookId2 = teclado.nextInt();
                 System.out.println(bookDAO.selectBooksAndGenres(bookId2) + "\n");
             default:
+                System.out.println("\n");
                 selectMenu();
                 break;
         }
