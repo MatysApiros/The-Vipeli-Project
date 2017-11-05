@@ -23,6 +23,11 @@ public class InsertsControler{
         bookDAO.insertBookType(bookId,typeId);
         return true;
     }
+    
+    public boolean updateEvaluation(int bookId, double evaluation){
+        bookDAO.updateBookEvaluation(bookId,evaluation);
+        return true;
+    }
 
     public boolean deleteBook(int bookId){
         bookDAO.deleteBook(bookId);
