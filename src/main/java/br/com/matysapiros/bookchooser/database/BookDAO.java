@@ -42,6 +42,18 @@ public class BookDAO {
         }
     }
 
+    public boolean updateBookEvaluation(int bookID, double evaluation){
+        String sql = "update books set avaliacao = ? where book_id = ?;";
+        try(PreparedStatement statementmt = connection.prepareStatement(sql)){
+            statementmt.setString(1, String.valueOf(evaluation));
+            statementmt.setString(2, String.valueOf(bookID));
+            statementmt.execute();
+            return true;
+        }catch (SQLException excption){
+            throw new RuntimeException(excption);
+        }
+    }
+
     public boolean deleteBook(int bookId){
         String sql = "delete from books where book_id = ?;";
         try(PreparedStatement statementmt = connection.prepareStatement(sql)){
