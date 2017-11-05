@@ -86,6 +86,7 @@ public class Menu {
                 int bookId3 = teclado.nextInt();
                 System.out.println("Insira a nova nota de Avaliação do Livro:");
                 double evaluation = teclado.nextDouble();
+                insertsControler.updateEvaluation(bookId3,evaluation);
                 System.out.println("\n");
                 managementMenu();
             case 5:
