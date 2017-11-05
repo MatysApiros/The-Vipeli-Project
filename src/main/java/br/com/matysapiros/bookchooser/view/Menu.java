@@ -21,13 +21,13 @@ public class Menu {
     public void menuPrincipal() {
         System.out.println("Menu Principal");
         System.out.println("Opções:");
-        System.out.println("1 - Menu Inserir;");
-        System.out.println("2 - Menu Pesquisar;");
+        System.out.println("1 - Menu de Gerenciamento de Informações;");
+        System.out.println("2 - Menu de Gerenciamento de Pesquisas;");
         System.out.println("3 - Finallizar Aplicação;" + "\n");
         int entrada = teclado.nextInt();
         switch (entrada){
             case 1:
-                insertMenu();
+                managementMenu();
                 return;
             case 2:
                 selectMenu();
@@ -41,13 +41,15 @@ public class Menu {
         }
     }
 
-    public void insertMenu(){
+    public void managementMenu(){
         System.out.println("\nSelecione a funcionalidade que deseja utilizar!\n");
         System.out.println("0 - Retornar ao menu anterior;");
         System.out.println("1 - Inserir Livros;");
         System.out.println("2 - Adicionar Gênero do Livro;");
         System.out.println("3 - Adicionar Tipo;");
-        System.out.println("4 - Deletar um Livro;\n");
+        System.out.println("4 - Alterar a Avaliação do Livro");
+        System.out.println("5 - Alterar o Tipo do Livro;");
+        System.out.println("6 - Deletar um Livro;\n");
         int entrada = teclado.nextInt();
 
         switch (entrada){
@@ -57,7 +59,7 @@ public class Menu {
                 System.out.println("\n");
                 insertsControler.insertBook(insertBookData());
                 System.out.println("Livro inserido com sucesso;\n");
-                insertMenu();
+                managementMenu();
                 return;
             case 2:
                 System.out.println("\n");
@@ -67,7 +69,7 @@ public class Menu {
                 int genreId = teclado.nextInt();
                 insertsControler.insertBookGenre(bookId, genreId);
                 System.out.println("\n");
-                insertMenu();
+                managementMenu();
                 return;
             case 3:
                 System.out.println("\n");
@@ -77,18 +79,35 @@ public class Menu {
                 int typeId = teclado.nextInt();
                 insertsControler.insertBookType(bookId2, typeId);
                 System.out.println("\n");
-                insertMenu();
+                managementMenu();
             case 4:
                 System.out.println("\n");
                 System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
                 int bookId3 = teclado.nextInt();
-                insertsControler.deleteBook(bookId3);
+                System.out.println("Insira a nova nota de Avaliação do Livro:");
+                double evaluation = teclado.nextDouble();
                 System.out.println("\n");
-                insertMenu();
+                managementMenu();
+            case 5:
+                System.out.println("\n");
+                System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
+                int bookId4 = teclado.nextInt();
+                System.out.println("Insira o ID do Tipo(*Caso não saiba o ID, consulte o ID do Tipo através de uma das opções de pesquisa!*)");
+                int typeId2 = teclado.nextInt();
+                insertsControler.insertBookType(bookId4, typeId2);
+                System.out.println("\n");
+                managementMenu();
+            case 6:
+                System.out.println("\n");
+                System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
+                int bookId5 = teclado.nextInt();
+                insertsControler.deleteBook(bookId5);
+                System.out.println("\n");
+                managementMenu();
                 return;
             default:
                 System.out.println("\n");
-                insertMenu();
+                managementMenu();
                 break;
         }
     }
@@ -131,13 +150,21 @@ public class Menu {
                 return;
             case 4:
                 System.out.println("\n");
-                System.out.println(listsControler.listOfGenres());
-                selectMenu();
+                try{
+                    System.out.println(listsControler.listOfGenres());
+                    selectMenu();
+                }catch(BooksException excption){
+                    System.out.println(excption);
+                }
                 return;
             case 5:
                 System.out.println("\n");
-                System.out.println(listsControler.listOfTypes());
-                selectMenu();
+                try{
+                    System.out.println(listsControler.listOfTypes());
+                    selectMenu();
+                }catch(BooksException excption){
+                    System.out.println(excption);
+                }
                 return;
             case 6:
                 System.out.println("\n");
@@ -164,4 +191,3 @@ public class Menu {
         return book;
     }
 }
-
