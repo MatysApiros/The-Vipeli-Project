@@ -18,7 +18,7 @@ create table genres(
 );
 
 create table books_types(
-	type_id numeric(10),
+	type_id int(10),
     description varchar(10),
     
     constraint pk_books_types primary key(type_id)
