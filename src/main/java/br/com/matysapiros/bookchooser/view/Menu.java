@@ -186,7 +186,7 @@ public class Menu {
         int numeracao = teclado.nextInt();
         System.out.println("Insira a Avaliação do Livro (*Caso não haja avaliação, dar nota 1,00*)");
         double avaliacao = teclado.nextDouble();
-        System.out.println("Insira o número de que o você leu o Livro:");
+        System.out.println("Insira o número de vezes que o você leu o Livro:");
         int vezesLido = teclado.nextInt();
         Book book = new Book(titulo,numeracao,avaliacao,vezesLido);
         return book;
