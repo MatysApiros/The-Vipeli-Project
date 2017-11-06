@@ -11,6 +11,10 @@ public class BooksWithGenres extends Book{
         this.genre = genre;
     }
 
+    public BooksWithGenres(){
+
+    }
+
     public String getNome() {
         return super.getNome();
     }

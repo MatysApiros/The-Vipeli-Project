@@ -171,7 +171,7 @@ public class Menu {
                 System.out.println("\n");
                 System.out.println("Insira o ID do Livro(*Caso não saiba o ID, consulte o ID do Livro através de uma das opções de pesquisa!*):");
                 int bookId2 = teclado.nextInt();
-                System.out.println(bookDAO.selectBooksAndGenres(bookId2) + "\n");
+                System.out.println(selectsControler.selectBookWithGenre(bookId2) + "\n");
             default:
                 System.out.println("\n");
                 selectMenu();
