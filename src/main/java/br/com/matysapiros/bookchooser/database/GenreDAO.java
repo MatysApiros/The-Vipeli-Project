@@ -13,7 +13,7 @@ public class GenreDAO {
     private Connection connection;
 
     public GenreDAO() {
-        this.connection = DatabaseConnetion.getConexao();
+        this.connection = DatabaseConnection.getConexao();
     }
 
     public boolean insertBookGenre(int bookID, int genreID){

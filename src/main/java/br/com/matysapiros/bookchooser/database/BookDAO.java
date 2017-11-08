@@ -13,7 +13,7 @@ public class BookDAO {
     private Connection connection;
 
     public BookDAO() {
-        this.connection = DatabaseConnetion.getConexao();
+        this.connection = DatabaseConnection.getConexao();
     }
 
     public boolean insertBook(Book book){
